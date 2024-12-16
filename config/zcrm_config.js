@@ -1,7 +1,8 @@
-require("dotenv").config();
-const axios = require("axios");
+// /config/zcrm_config.js
+require('dotenv').config();
+const axios = require('axios');
 
-let accessToken = null; // Store access token in memory
+let accessToken = null;  // Store access token in memory
 
 async function generateAccessToken() {
   try {
@@ -9,16 +10,16 @@ async function generateAccessToken() {
       params: {
         client_id: process.env.ZOHO_CLIENT_ID,
         client_secret: process.env.ZOHO_CLIENT_SECRET,
-        grant_type: "refresh_token",
+        grant_type: 'refresh_token',
         refresh_token: process.env.ZOHO_REFRESH_TOKEN,
       },
     });
     accessToken = response.data.access_token;
-    console.log("Access token refreshed successfully!");
+    console.log('Access token refreshed successfully!');
     return accessToken;
   } catch (error) {
-    console.error("Error generating access token:", error.response.data);
-    throw new Error("Failed to generate access token.");
+    console.error('Error generating access token:', error.response.data);
+    throw new Error('Failed to generate access token.');
   }
 }
 
@@ -30,14 +31,3 @@ async function getAccessToken() {
 }
 
 module.exports = { getAccessToken };
-
-
-
-
-
-
-
-
-
-
-
